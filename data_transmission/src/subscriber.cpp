@@ -17,7 +17,7 @@ int main(int argc, char** argv){
     // Establish this program as a ROS node
     ros::NodeHandle nh;
     // Create subscriber object with following options: topic="/turtle1/cmd_vel", queue size= 1000 and callback function= messageRecieved
-    ros::Subscriber subsriber= nh.subscribe("/turtle1/cmd_vel", 1000, &messageRecieved);
+    ros::Subscriber subsriber= nh.subscribe("turtle1/cmd_vel", 1000, &messageRecieved);
     // Give ROS explicit permission the call callback function
     ros::spin();
     return 0;

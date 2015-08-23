@@ -11,7 +11,7 @@ int main(int argc, char** argv){
     // establish this program as a ROS node
     ros::NodeHandle nh;
     // create publisher object with following options: message type= geometry_msgs::Twist, topic="/turtle1/cmd_vel" and queue size= 1000
-    ros::Publisher publisher= nh.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel",1000);
+    ros::Publisher publisher= nh.advertise<geometry_msgs::Twist>("turtle1/cmd_vel",1000);
     // seed the srand()
     srand(time(0));
     // set loop rate to 2Hz until the node is shut down
