@@ -128,6 +128,7 @@ include_directories(
 # add_executable(hello_world_node src/hello_world_node.cpp)
 
 add_executable(hello_world src/hello_world.cpp)
+add_executable(hello src/hello.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -139,7 +140,7 @@ add_executable(hello_world src/hello_world.cpp)
 # )
 
 target_link_libraries(hello_world ${catkin_LIBRARIES})
-
+target_link_libraries(hello ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
