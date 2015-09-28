@@ -21,6 +21,8 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 ## Declare a cpp executable
 add_executable(camera_node src/camera_node.cpp)
 
+
 ## Specify libraries to link a library or executable target against
 target_link_libraries(camera_node ${catkin_LIBRARIES})
 target_link_libraries(camera_node ${OpenCV_LIBS})
+

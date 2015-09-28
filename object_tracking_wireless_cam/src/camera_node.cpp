@@ -44,12 +44,12 @@ int main(int argc, char** argv){
 	ros::init(argc, argv, "camera_node");
 	ros::NodeHandle nh;
 	image_transport::ImageTransport it(nh);
-	image_transport::Publisher imagePublisher = it.advertise("out_image_base_topic", 1);
+	image_transport::Publisher imagePublisher = it.advertise("/networkCam", 1);
 
 
     cameraObject networkCamera;
-    networkCamera.ip = "http://192.168.1.37";
-    networkCamera.port = "80";
+    networkCamera.ip = "http://192.168.1.38";
+    networkCamera.port = "81";
     networkCamera.streamURL = "/videostream.cgi?loginuse=admin&loginpas=12345&dummy=param.mjpg";
 
     cv::namedWindow("Network Stream",1);
@@ -65,19 +65,18 @@ int main(int argc, char** argv){
 	rosImage.header.stamp = ros::Time::now();
 	rosImage.header.frame_id = "bar";
 
-    while (ros::ok()){
+    while(ros::ok()){
     	capture >> frame;
-    	std::cout<<"Frame acquired"<<std::endl;
     	rosImage.image = frame.clone();
-    	std::cout<<"Frame copied"<<std::endl;
+
 
     	imagePublisher.publish(rosImage.toImageMsg());
-    	std::cout<<"Frame published"<<std::endl;
 
 		cv::imshow("Network Stream",frame);
 		if(cv::waitKey(30) >= 0)
 			break;
 		ros::spinOnce();
 	}
+
 	return 0;
 }
