@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(timedCommunication)
+project(lesson_3_89685)
 
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs)
@@ -18,9 +18,7 @@ catkin_package()
 include_directories(${catkin_INCLUDE_DIRS})
 
 ## Declare a cpp executable
-add_executable(timedPublisher src/publisher.cpp)
-add_executable(timedSubscriber src/subscriber.cpp)
+add_executable(moveTurtle src/moveTurtle.cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(timedPublisher ${catkin_LIBRARIES})
-target_link_libraries(timedSubscriber ${catkin_LIBRARIES})
+target_link_libraries(moveTurtle ${catkin_LIBRARIES})
