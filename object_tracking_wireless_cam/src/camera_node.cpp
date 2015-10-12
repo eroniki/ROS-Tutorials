@@ -38,8 +38,6 @@ struct cameraObject{
 	std::string commands;
 };
 
-// const int directions[8] = {1,2,3,4,5,6,7};
-
 int main(int argc, char** argv){
 	ros::init(argc, argv, "camera_node");
 	ros::NodeHandle nh;
@@ -56,7 +54,7 @@ int main(int argc, char** argv){
     std::string fullURL = networkCamera.ip + ":" + networkCamera.port + networkCamera.streamURL;
     std::cout<<"URL to stream from: "<<fullURL<<std::endl;
     cv::VideoCapture capture(fullURL);
-    std::cout<<"capture object initialized"<<std::cout;
+    std::cout<<"capture object initialized"<<std::endl;
 
     cv::Mat frame;
 	cv_bridge::CvImage rosImage;

@@ -1,27 +1,24 @@
 #!/usr/bin/env python
 import rospy
 from std_msgs.msg import Float32MultiArray
+from geometry_msgs.msg import Twist
 import urllib2
 import time 
 import cv2
 
-def control_motors(error_x, error_y):
-	if(error_x>60):
-		urlExecution(4)
-		time.sleep(0.05)
-		urlExecution(5)
-	elif(error_x<-60):
+def control_motors(x,y):
+	if(x<0):
 		urlExecution(6)
-		time.sleep(0.05)
-		urlExecution(7)
-	if(error_y>60):
+		print("Right")
+	elif(x>0):
+		urlExecution(4)
+		print("Left")
+	if(y>0):
 		urlExecution(0)
-		time.sleep(0.05)
-		urlExecution(1)
-	elif(error_y<-60):
+		print("Up")
+	elif(y<0):
 		urlExecution(2)
-		time.sleep(0.05)
-		urlExecution(3)
+		print("Down")
 
 def urlExecution(command):
 	ip = 'http://192.168.1.38:81/decoder_control.cgi?loginuse=admin&loginpas=12345&command='
@@ -33,15 +30,13 @@ def urlExecution(command):
 	rospy.loginfo(fullURL)
 
 def callback(data):
-	rospy.loginfo(type(data.data))
-	rospy.loginfo(data.data)
-	if(len(data.data)>0):
-		rospy.loginfo('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-		rospy.loginfo('X: ' + str(data.data[9]))
-		rospy.loginfo('Y: ' + str(data.data[10]))
-		error_x= 320.0-data.data[9]-data.data[1]/2;
-		error_y= 240.0-data.data[10]-data.data[2]/2;
-		control_motors(error_x,error_y);
+	rospy.loginfo('~~~~~~~~~~~~~~~~~~')
+	rospy.loginfo('Linear: ')
+	rospy.loginfo(data.linear.x)
+	rospy.loginfo('~~~~~~~~~~~~~~~~~~')
+	rospy.loginfo('Angular: ')
+	rospy.loginfo(data.angular.z)
+	control_motors(data.angular.z, data.linear.x);
 
     
 def listener():
@@ -50,9 +45,9 @@ def listener():
     # anonymous=True flag means that rospy will choose a unique
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
-    rospy.init_node('object_tracking', anonymous=True)
+    rospy.init_node('camera_control', anonymous=True)
 
-    rospy.Subscriber("/objects", Float32MultiArray, callback)
+    rospy.Subscriber("/turtle1/cmd_vel", Twist, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
