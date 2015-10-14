@@ -24,7 +24,7 @@ def control_motors(vertical, horizontal):
 		urlExecution(3)
 
 def urlExecution(command):
-	ip = 'http://192.168.1.76:81/decoder_control.cgi?loginuse=admin&loginpas=12345&command='
+	ip = 'http://192.168.1.6:81/decoder_control.cgi?loginuse=admin&loginpas=12345&command='
 	oneStep = '&onestep=1&'
 	gibberish = '7485621407675288&_='
 	timeStamp = int(time.time())*1000

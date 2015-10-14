@@ -49,7 +49,7 @@ int main(int argc, char** argv){
 	image_transport::Publisher imagePublisher = it.advertise("/networkCam", 1);
 
     cameraObject networkCamera;
-    networkCamera.ip = "http://192.168.1.76";
+    networkCamera.ip = "http://192.168.1.6";
     networkCamera.port = "81";
     networkCamera.streamURL = "/videostream.cgi?loginuse=admin&loginpas=12345&dummy=param.mjpg";
 

@@ -5,7 +5,7 @@ import rospy
 from sensor_msgs.msg import Joy
 
 def urlExecution(command):
-    ip = 'http://192.168.1.76:81/decoder_control.cgi?loginuse=admin&loginpas=12345&command='
+    ip = 'http://192.168.1.6:81/decoder_control.cgi?loginuse=admin&loginpas=12345&command='
     oneStep = '&onestep=1&'
     gibberish = '7485621407675288&_='
     timeStamp = int(time.time())*1000
@@ -39,7 +39,7 @@ def callback(data):
     	vertical = data.axes[5]
     	control_motors(vertical,horizontal)
 
-form_class = uic.loadUiType("mainwindow.ui")[0]                 # Load the UI
+form_class = uic.loadUiType("/home/cms-e/catkin_ws/src/network_camera/src/mainwindow.ui")[0]                 # Load the UI
 
 class MainWindow(QtGui.QMainWindow, form_class):
     def __init__(self, parent=None):
