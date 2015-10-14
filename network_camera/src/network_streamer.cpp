@@ -35,7 +35,6 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
-#include "opencv2/videoio/videoio.hpp"
 
 struct cameraObject{
 	std::string ip;
@@ -72,10 +71,8 @@ int main(int argc, char** argv){
 
     while(ros::ok()){
 //    	frame = cv::imread("~/Desktop/opencv-logo-small.png");
-//    	capture>>frame;
-    	cv::Mat frame2;
-    	capture.read(frame2);
-    	std::cout<<"frame acquired"<<std::endl;
+    	capture>>frame;
+    	capture.read(frame);
     	if(frame.empty()){
     		std::cout<<"Frame is empty"<<std::endl;
     		continue;
